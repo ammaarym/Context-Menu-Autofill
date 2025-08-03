@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,                           // Required for Chrome extensions using the latest platform features
+  "name": "Context Menu Autofill Extension",       // Extension name
+  "version": "1.0",                                // Version number
+  "description": "Right-click to autofill name or email", // Description shown in Chrome
+  "permissions": [
+    "contextMenus",                                // Needed to create and manage right-click menus
+    "storage",                                     // Needed to save/retrieve data locally
+    "activeTab",                                   // Access to the current tab
+    "scripting"                                    // To inject scripts if needed (not used in this case but often helpful)
+  ],
+  "host_permissions": ["<all_urls>"],              // Allows access to content on all sites
+  "background": {
+    "service_worker": "background.js"              // Background script that stays alive and listens globally
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],                   // Run content.js on all websites
+      "js": ["content.js"]
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html"                  // Optional popup to set name/email
+  }
+}
